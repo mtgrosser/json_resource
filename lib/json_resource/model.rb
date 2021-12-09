@@ -1,17 +1,18 @@
+using JsonResource::Refinements
+
 module JsonResource
   module Model
-    extend ActiveSupport::Concern
-    
     TRUE_VALUES = [true, 1, '1', 't', 'T', 'true', 'TRUE', 'on', 'ON'].to_set
     
-    included do
-      class_attribute :attributes, :collections, :objects, :root_path, :inflection
-      self.attributes = {}
-      self.collections = {}
-      self.objects = {}
-      self.inflection = :lower_camelcase
+    def self.included(base)
+      base.extend ClassMethods
+      base.class_attribute :attributes, :collections, :objects, :root_path, :inflection
+      base.attributes = {}
+      base.collections = {}
+      base.objects = {}
+      base.inflection = :lower_camelcase
     end
-  
+
     module ClassMethods
       
       def from_json(obj, default_attrs = {})
@@ -27,7 +28,7 @@ module JsonResource
             attrs[name] = value
           end
         end
-        instance = new(attrs.compact.reverse_merge(default_attrs))
+        instance = new(default_attrs.merge(attrs.compact))
         self.objects.each do |name, options|
           if path = object_path(name)
             instance.public_send("#{name}=", object_class(name).from_json(json_dig(json, *path)))
@@ -61,7 +62,7 @@ module JsonResource
     
       [:attribute, :object, :collection].each do |method_name|
         define_method "#{method_name}_names" do
-          send(method_name.to_s.pluralize).keys
+          send("#{method_name}s").keys
         end
       end
     
@@ -114,7 +115,7 @@ module JsonResource
         if objects[name] && class_name = objects[name][:class_name]
           class_name.constantize
         else
-          name.to_s.camelize.constantize
+          name.to_s.camelcase.constantize
         end
       end
     
@@ -122,7 +123,7 @@ module JsonResource
         if collections[name] && class_name = collections[name][:class_name]
           class_name.constantize
         else
-          name.to_s.singularize.camelize.constantize
+          name.to_s.singularize.camelcase.constantize
         end
       end
     
@@ -201,15 +202,15 @@ module JsonResource
     end
   
     def attributes
-      @attributes ||= {}.with_indifferent_access
+      @attributes ||= {}
     end
   
     def [](attr_name)
-      attributes[attr_name]
+      attributes[attr_name.to_sym]
     end
   
     def []=(attr_name, value)
-      attributes[attr_name] = value
+      attributes[attr_name.to_sym] = value
     end
   
   end

@@ -12,9 +12,11 @@ Gem::Specification.new do |s|
   s.summary       = 'Create Ruby objects from JSON data'
   s.homepage      = 'https://github.com/mtgrosser/json_resource'
 
-  s.files = ['LICENSE', 'README.md', 'CHANGELOG.md'] + Dir['lib/**/*.{rb,js}']
+  s.files = ['LICENSE', 'README.md', 'CHANGELOG.md'] + Dir['lib/**/*.{rb}']
   
   s.required_ruby_version = '>= 2.6.0'
+
+  s.add_dependency 'json'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'irb'
