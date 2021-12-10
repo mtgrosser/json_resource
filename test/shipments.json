@@ -1,1 +1,122 @@
-{"shipments":[{"serviceUrl":"https://www.dhl.de/de/privatkunden.html?piececode=123456789012&cid=c_dhl_de_352_20234757","rerouteUrl":"https://www.dhl.de/de/privatkunden.html?piececode=123456789012&verfuegen_selected_tab=FIRST&cid=c_dhl_de_352_34534","id":"123456789012","service":"parcel-de","origin":{"address":{"countryCode":"DE"}},"destination":{"address":{"countryCode":"DE"}},"status":{"timestamp":"2021-12-09T15:26:00","location":{"address":{"addressLocality":"Ludwigsfelde, Deutschland"}},"statusCode":"transit","status":"Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet.","description":"Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet."},"details":{"product":{"productName":"DHL PAKET"},"proofOfDeliverySignedAvailable":false,"totalNumberOfPieces":1,"pieceIds":["35884612608"],"weight":{"value":5,"unitText":"kg"},"dimensions":{"width":{"value":0.6,"unitText":"m"},"height":{"value":0.6,"unitText":"m"},"length":{"value":1.2,"unitText":"m"}}},"events":[{"timestamp":"2021-12-09T15:26:00","location":{"address":{"addressLocality":"Ludwigsfelde, Deutschland"}},"statusCode":"transit","status":"Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet.","description":"Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet."},{"timestamp":"2021-12-09T09:54:00","location":{"address":{"addressLocality":"Deutschland"}},"statusCode":"transit","status":"Die Sendung wurde abgeholt.","description":"Die Sendung wurde abgeholt."},{"timestamp":"2021-12-09T09:43:00","location":{"address":{"addressLocality":"Deutschland"}},"statusCode":"transit","status":"Die Sendung wurde zum Weitertransport aus der PACKSTATION entnommen.","description":"Die Sendung wurde zum Weitertransport aus der PACKSTATION entnommen."},{"timestamp":"2021-12-08T18:43:00","location":{"address":{"addressLocality":"Deutschland"}},"statusCode":"transit","status":"Die Sendung wurde vom Absender in die Packstation eingeliefert.","description":"Die Sendung wurde vom Absender in die Packstation eingeliefert."},{"timestamp":"2021-12-08T13:33:00","statusCode":"pre-transit","status":"Die Sendung wurde elektronisch angekündigt. Sobald die Sendung von uns bearbeitet wurde, erhalten Sie weitere Informationen.","description":"Die Sendung wurde elektronisch angekündigt. Sobald die Sendung von uns bearbeitet wurde, erhalten Sie weitere Informationen."}]}],"possibleAdditionalShipmentsUrl":["/track/shipments?trackingNumber=123456789012&language=de&service=freight","/track/shipments?trackingNumber=123456789012&language=de&service=dgf","/track/shipments?trackingNumber=123456789012&language=de&service=ecommerce","/track/shipments?trackingNumber=123456789012&language=de&service=parcel-nl","/track/shipments?trackingNumber=123456789012&language=de&service=parcel-pl","/track/shipments?trackingNumber=123456789012&language=de&service=express","/track/shipments?trackingNumber=123456789012&language=de&service=post-de","/track/shipments?trackingNumber=123456789012&language=de&service=sameday","/track/shipments?trackingNumber=123456789012&language=de&service=parcel-uk"]}
+{
+  "shipments": [
+    {
+      "serviceUrl": "https://www.dhl.de/de/privatkunden.html?piececode=123456789012&cid=c_dhl_de_352_20234757",
+      "rerouteUrl": "https://www.dhl.de/de/privatkunden.html?piececode=123456789012&verfuegen_selected_tab=FIRST&cid=c_dhl_de_352_34534",
+      "id": "123456789012",
+      "service": "parcel-de",
+      "origin": {
+        "address": {
+          "countryCode": "DE"
+        }
+      },
+      "destination": {
+        "address": {
+          "countryCode": "DE"
+        }
+      },
+      "status": {
+        "timestamp": "2021-12-09T15:26:00",
+        "location": {
+          "address": {
+            "addressLocality": "Ludwigsfelde, Deutschland"
+          }
+        },
+        "statusCode": "transit",
+        "status": "Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet.",
+        "description": "Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet."
+      },
+      "details": {
+        "product": {
+          "productName": "DHL PAKET"
+        },
+        "proofOfDeliverySignedAvailable": false,
+        "totalNumberOfPieces": 1,
+        "pieceIds": [
+          "35884612608"
+        ],
+        "weight": {
+          "value": 5,
+          "unitText": "kg"
+        },
+        "dimensions": {
+          "width": {
+            "value": 0.6,
+            "unitText": "m"
+          },
+          "height": {
+            "value": 0.6,
+            "unitText": "m"
+          },
+          "length": {
+            "value": 1.2,
+            "unitText": "m"
+          }
+        }
+      },
+      "events": [
+        {
+          "timestamp": "2021-12-09T15:26:00",
+          "location": {
+            "address": {
+              "addressLocality": "Ludwigsfelde, Deutschland"
+            }
+          },
+          "statusCode": "transit",
+          "status": "Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet.",
+          "description": "Die Sendung wurde von DHL bearbeitet und wird für den Weitertransport in die Region des Empfängers vorbereitet."
+        },
+        {
+          "timestamp": "2021-12-09T09:54:00",
+          "location": {
+            "address": {
+              "addressLocality": "Deutschland"
+            }
+          },
+          "statusCode": "transit",
+          "status": "Die Sendung wurde abgeholt.",
+          "description": "Die Sendung wurde abgeholt."
+        },
+        {
+          "timestamp": "2021-12-09T09:43:00",
+          "location": {
+            "address": {
+              "addressLocality": "Deutschland"
+            }
+          },
+          "statusCode": "transit",
+          "status": "Die Sendung wurde zum Weitertransport aus der PACKSTATION entnommen.",
+          "description": "Die Sendung wurde zum Weitertransport aus der PACKSTATION entnommen."
+        },
+        {
+          "timestamp": "2021-12-08T18:43:00",
+          "location": {
+            "address": {
+              "addressLocality": "Deutschland"
+            }
+          },
+          "statusCode": "transit",
+          "status": "Die Sendung wurde vom Absender in die Packstation eingeliefert.",
+          "description": "Die Sendung wurde vom Absender in die Packstation eingeliefert."
+        },
+        {
+          "timestamp": "2021-12-08T13:33:00",
+          "statusCode": "pre-transit",
+          "status": "Die Sendung wurde elektronisch angekündigt. Sobald die Sendung von uns bearbeitet wurde, erhalten Sie weitere Informationen.",
+          "description": "Die Sendung wurde elektronisch angekündigt. Sobald die Sendung von uns bearbeitet wurde, erhalten Sie weitere Informationen."
+        }
+      ]
+    }
+  ],
+  "possibleAdditionalShipmentsUrl": [
+    "/track/shipments?trackingNumber=123456789012&language=de&service=freight",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=dgf",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=ecommerce",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=parcel-nl",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=parcel-pl",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=express",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=post-de",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=sameday",
+    "/track/shipments?trackingNumber=123456789012&language=de&service=parcel-uk"
+  ]
+}

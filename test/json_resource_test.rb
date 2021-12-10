@@ -2,15 +2,30 @@ require_relative 'test_helper'
 
 class JsonResourceTest < Minitest::Test
 
-  def test_load_json
-    shipment = Shipment.from_json(load_json(:shipments))
+  def test_load_object
+    shipment = Shipment.from_json(load_json(:shipments), root: ['shipments', '[0]'])
     assert_equal 'transit', shipment.status
     assert_equal 5, shipment.events.size
     assert_equal ['Ludwigsfelde, Deutschland', 'Deutschland', 'Deutschland', 'Deutschland', nil], shipment.events.map(&:locality)
   end
-  
+
+  def test_load_collection
+    posts = Post.collection_from_json(load_json(:array))
+    assert_equal 2, posts.size
+    assert_equal [123, 456], posts.map(&:id)
+    assert_equal ['Lorem ipsum', 'Make it so!'], posts.map(&:body)
+  end
+
+  def test_load_collection_with_root
+    posts = Post.collection_from_json(load_json(:posts), root: 'posts')
+    assert_equal 1, posts.size
+    assert post = posts.first
+    assert_equal 123, post.id
+    assert_equal 'Lorem ipsum', post.body
+  end
+
   private
-  
+
   def load_json(name)
     Pathname.new(__FILE__).dirname.join("#{name}.json").read
   end

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 123,
+    "body": "Lorem ipsum",
+    "timestamp": "2021-12-08T18:43:00",
+    "status": {
+      "statusCode": 2,
+      "statusText": "published"
+    },
+    "comments": [
+      {
+        "author": "Mr. Spock",
+        "text": "Fascinating!",
+        "timestamp": "2350-05-01T19:00:00"
+      },
+      {
+        "author": "Chekov",
+        "text": "Warp 10",
+        "timestamp": "2350-05-01T20:00:00"
+      }
+    ]
+  },
+  {
+    "id": 456,
+    "body": "Make it so!",
+    "timestamp": "2021-11-05T15:03:00",
+    "status": {
+      "statusCode": 1,
+      "statusText": "pending"
+    }
+  }
+]

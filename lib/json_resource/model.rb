@@ -1,12 +1,12 @@
-using JsonResource::Refinements
-
 module JsonResource
+  using JsonResource::Refinements
+
   module Model
     TRUE_VALUES = [true, 1, '1', 't', 'T', 'true', 'TRUE', 'on', 'ON'].to_set
     
     def self.included(base)
       base.extend ClassMethods
-      base.class_attribute :attributes, :collections, :objects, :root_path, :inflection
+      base.class_attribute :attributes, :collections, :objects, :inflection
       base.attributes = {}
       base.collections = {}
       base.objects = {}
@@ -15,9 +15,9 @@ module JsonResource
 
     module ClassMethods
       
-      def from_json(obj, default_attrs = {})
+      def from_json(obj, defaults: {}, root: nil)
         return unless json = parse(obj)
-        json = json_dig(json, *root_path) if root_path
+        json = json_dig(json, *root) if root
         attrs = {}
         self.attributes.each do |name, options|
           if path = attribute_path(name)
@@ -28,36 +28,30 @@ module JsonResource
             attrs[name] = value
           end
         end
-        instance = new(default_attrs.merge(attrs.compact))
+        instance = new(defaults.merge(attrs.compact))
         self.objects.each do |name, options|
-          if path = object_path(name)
-            instance.public_send("#{name}=", object_class(name).from_json(json_dig(json, *path)))
+          if path = object_path(name) and obj = json_dig(json, *path)
+            instance.public_send("#{name}=", object_class(name).from_json(obj))
           end
         end
         self.collections.each do |name, options|
-          if path = collection_path(name)
-            instance.public_send("#{name}=", collection_class(name).collection_from_json(json_dig(json, *path)))
+          collection = if path = collection_path(name) and obj = json_dig(json, *path)
+            instance.public_send("#{name}=", collection_class(name).collection_from_json(obj))
+          else
+            []
           end
         end
         instance
       end
     
-      def collection_from_json(obj, default_attrs = {})
+      def collection_from_json(obj, defaults: {}, root: nil)
         json = parse(obj)
         json = json_dig(json, root) if root
-        json.map { |hsh| from_json(hsh, default_attrs) }.compact
+        json.map { |hsh| from_json(hsh, defaults: defaults) }.compact
       end
     
       def basename
         name.sub(/^.*::/, '')
-      end
-    
-      def root
-        self.root_path
-      end
-    
-      def root=(root)
-        self.root_path = root
       end
     
       [:attribute, :object, :collection].each do |method_name|
@@ -115,7 +109,7 @@ module JsonResource
         if objects[name] && class_name = objects[name][:class_name]
           class_name.constantize
         else
-          name.to_s.camelcase.constantize
+          name.to_s.classify.constantize
         end
       end
     
@@ -123,7 +117,7 @@ module JsonResource
         if collections[name] && class_name = collections[name][:class_name]
           class_name.constantize
         else
-          name.to_s.singularize.camelcase.constantize
+          name.to_s.singularize.classify.constantize
         end
       end
     
