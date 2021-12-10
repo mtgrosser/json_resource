@@ -17,10 +17,4 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.6.0'
 
   s.add_dependency 'json'
-
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'irb'
-  s.add_development_dependency 'byebug'
-  s.add_development_dependency 'minitest'
-  s.add_development_dependency 'webmock'
 end
