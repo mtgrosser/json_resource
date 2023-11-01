@@ -3,6 +3,7 @@ module JsonResource
 
   module Model
     TRUE_VALUES = [true, 1, '1', 't', 'T', 'true', 'TRUE', 'on', 'ON'].to_set
+    BIGDECIMAL_PRECISION = 18
     
     def self.included(base)
       base.extend ClassMethods
@@ -23,7 +24,7 @@ module JsonResource
           if path = attribute_path(name)
             value = json_dig(json, *path)
             if !value.nil? && type = attribute_type(name)
-              value = cast_to(type, value)
+              value = cast_to(type, value, name)
             end
             attrs[name] = value
           end
@@ -95,16 +96,20 @@ module JsonResource
       end
 
       [:attribute, :object, :collection].each do |method_name|
+        define_method "#{method_name}_options" do |name|
+          send(method_name.to_s.pluralize).try(:[], name)
+        end
+        
         define_method "#{method_name}_path" do |name|
-          options = send(method_name.to_s.pluralize)
-          Array(options[name].try(:[], :path)).presence || [inflect(name)]
+          options = send("#{method_name}_options", name)
+          Array(options.try(:[], :path)).presence || [inflect(name)]
         end
       end
 
       def attribute_type(name)
         attributes[name] && attributes[name][:type]
       end
-    
+      
       def object_class(name)
         if objects[name] && class_name = objects[name][:class_name]
           class_name.constantize
@@ -121,13 +126,13 @@ module JsonResource
         end
       end
     
-      def cast_to(type, value)  # only called for non-nil values
+      def cast_to(type, value, name)  # only called for non-nil values
         case type
         when :string    then value
         when :integer   then value.to_i
         when :float     then value.to_f
         when :boolean   then cast_to_boolean(value)
-        when :decimal   then BigDecimal(value)
+        when :decimal   then cast_to_big_decimal(value, **attribute_options(name))
         when :date      then value.presence && Date.parse(value)
         when :time      then value.presence && Time.parse(value)
         else
@@ -141,6 +146,26 @@ module JsonResource
         else
           TRUE_VALUES.include?(value)
         end
+      end
+      
+      def cast_to_big_decimal(value, scale: nil, precision: nil, **)
+        cast_value = case value
+        when ::Float
+          precision ||= BIGDECIMAL_PRECISION
+          float_precision = precision.to_i > ::Float::DIG + 1 ? ::Float::DIG + 1 : precision.to_i
+          BigDecimal(value, float_precision)
+        when ::Numeric
+          BigDecimal(value, precision || BIGDECIMAL_PRECISION)
+        when ::String
+          begin
+            value.to_d
+          rescue ArgumentError
+            BigDecimal(0)
+          end
+        else
+          value.respond_to?(:to_d) ? value.to_d : BigDecimal(value.to_s)
+        end
+        scale ? cast_value.round(scale) : cast_value
       end
 
       def parse(obj)

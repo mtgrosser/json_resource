@@ -1,0 +1,14 @@
+{
+  "planets": [
+    {
+      "name": "earth",
+      "mass": 5.9722E+24,
+      "orbit": 1.000
+    },
+    {
+      "name": "jupiter",
+      "mass": 1.899E+27,
+      "orbit": 5.205
+    }
+  ]
+}

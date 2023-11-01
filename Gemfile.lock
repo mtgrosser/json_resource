@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_resource (1.0.0)
+    json_resource (1.1.0)
       json
 
 GEM

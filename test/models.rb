@@ -41,3 +41,11 @@ class Comment
   attribute :text,      type: :string
   attribute :timestamp, type: :time
 end
+
+class Planet
+  include JsonResource::Model
+  
+  attribute :name, type: :string
+  attribute :mass, type: :decimal, scale: 0
+  attribute :orbit, type: :decimal, scale: 2, precision: 12
+end
