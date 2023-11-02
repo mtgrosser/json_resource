@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "status": "ok"
+    },
+    {
+      "planets": [
+        {
+          "name": "Earth",
+          "mass": 5.9722E+24,
+          "orbit": 1.000
+        },
+        {
+          "name": "Jupiter",
+          "mass": 1.8990E+27,
+          "orbit": 5.205
+        }
+      ]
+    }
+  ]
+}

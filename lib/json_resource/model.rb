@@ -47,7 +47,7 @@ module JsonResource
     
       def collection_from_json(obj, defaults: {}, root: nil)
         json = parse(obj)
-        json = json_dig(json, root) if root
+        json = json_dig(json, *root) if root
         json.map { |hsh| from_json(hsh, defaults: defaults) }.compact
       end
     

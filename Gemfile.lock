@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_resource (1.1.0)
+    json_resource (1.1.1)
       json
 
 GEM
@@ -11,7 +11,7 @@ GEM
     io-console (0.5.9)
     irb (1.3.7)
       reline (>= 0.2.7)
-    json (2.6.1)
+    json (2.6.3)
     minitest (5.14.4)
     rake (13.0.6)
     reline (0.2.7)

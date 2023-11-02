@@ -24,6 +24,11 @@ class JsonResourceTest < Minitest::Test
     assert_equal 'Lorem ipsum', post.body
   end
   
+  def test_load_collection_from_array_element
+    planets = Planet.collection_from_json(load_json(:array_of_planets), root: %w[data [1] planets])
+    assert_equal %w[Earth Jupiter], planets.map(&:name)
+  end
+  
   def test_casting_big_decimals
     planets = Planet.collection_from_json(load_json(:planets), root: 'planets')
     assert_equal [5972200000000000000000000, 1899000000000000000000000000], planets.map(&:mass)

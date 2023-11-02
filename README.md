@@ -62,3 +62,69 @@ posts.first.body => 'Lorem ipsum'
 posts.first.status_text => 'published'
 posts.first.comments.first.author => 'Mr. Spock'
 ```
+
+## Instantiation
+
+To instantiate collections, use `collection_from_json` on a JSON array.
+
+To instantiate single objects, use `from_json` on a JSON hash.
+
+
+## Field types
+
+Attributes can have one of the following types:
+
+| Type        | Conversion          | Options                   |
+| ----------- | ------------------- | ------------------------- |
+| `:string`   | `value`             |                           |
+| `:integer`  | `value.to_i`        |                           |
+| `:float`    | `value.to_f`        |                           |
+| `:boolean`  | any of `[true, 1, '1', 't', 'T', 'true', 'TRUE', 'on', 'ON']` | |
+| `:decimal`  | direct, or `to_d`   | `:precision`, `:scale`    |
+| `:date`     | `Date.parse`        |                           |
+| `:time`     | `Time.parse`        |                           |
+| ----------- | ------------------- | ------------------------- |
+
+
+## Extracting data
+
+Sometimes, APIs return data wrapped within arrays of hashes of arrays etc:
+
+```json
+{
+  "data": [
+    {
+      "status": "ok"
+    },
+    {
+      "planets": [
+        {
+          "name": "Earth",
+          "mass": 5.9722E+24,
+          "orbit": 1.000
+        },
+        {
+          "name": "Jupiter",
+          "mass": 1.8990E+27,
+          "orbit": 5.205
+        }
+      ]
+    }
+  ]
+}
+```
+
+```ruby
+class Planet
+  include JsonResource::Model
+  
+  attribute :name, type: :string
+  attribute :mass, type: :decimal, precision: 10, scale: 4
+end
+```
+
+To dig for this data, a call-sequence can be provided as the `root` option.
+
+```ruby
+planets = Planet.collection_from_json(json, root: %w[data [1] planets])
+```
