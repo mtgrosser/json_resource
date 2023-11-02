@@ -83,7 +83,6 @@ Attributes can have one of the following types:
 | `:decimal`  | direct, or `to_d`   | `:precision`, `:scale`    |
 | `:date`     | `Date.parse`        |                           |
 | `:time`     | `Time.parse`        |                           |
-| ----------- | ------------------- | ------------------------- |
 
 
 ## Extracting data
