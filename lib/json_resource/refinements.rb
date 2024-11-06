@@ -202,7 +202,19 @@ module JsonResource
       def symbolize_keys
         transform_keys(&:to_sym)
       end
-      
+
+    end
+
+    refine Array do
+
+      def extract_options!
+        if last.is_a?(Hash) && last.instance_of?(Hash)
+          pop
+        else
+          {}
+        end
+      end
+
     end
 
   end

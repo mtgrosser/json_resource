@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
 
   s.files = ['LICENSE', 'README.md', 'CHANGELOG.md'] + Dir['lib/**/*.{rb}']
   
-  s.required_ruby_version = '>= 2.7.0'
+  s.required_ruby_version = '>= 3.2.0'
 
   s.add_dependency 'json'
+  s.add_dependency 'bigdecimal'
 end

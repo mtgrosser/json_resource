@@ -37,8 +37,8 @@ end
 class Comment
   include JsonResource::Model
 
-  attribute :author,    type: :string
-  attribute :text,      type: :string
+  has_attributes :author, :text, type: :string
+
   attribute :timestamp, type: :time
 end
 

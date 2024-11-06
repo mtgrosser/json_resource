@@ -68,9 +68,9 @@ module JsonResource
         attribute_accessor_method name
       end
     
-      def attributes(*args)
+      def has_attributes(*args)
         options = args.extract_options!
-        args.each { |arg| has_attribute arg, options }
+        args.each { |arg| attribute arg, options }
       end
     
       def has_object(name, options = {})
@@ -186,7 +186,7 @@ module JsonResource
           string.camelcase(:upper)
         when :dasherize
           string.underscore.dasherize
-        when nil
+        when nil, :underscore
           string.underscore
         else
           string.public_send(inflection)
